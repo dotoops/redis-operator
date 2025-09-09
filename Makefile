@@ -4,10 +4,10 @@ VERSION := v1.3.0-rc0
 SERVICE_NAME := redis-operator
 
 # Docker image name for this project
-IMAGE_NAME := spotahome/$(SERVICE_NAME)
+IMAGE_NAME := dotoops/$(SERVICE_NAME)
 
 # Repository url for this project
-REPOSITORY := quay.io/$(IMAGE_NAME)
+REPOSITORY := docker.io/$(IMAGE_NAME)
 
 # Shell to use for running scripts
 SHELL := $(shell which bash)
@@ -39,7 +39,7 @@ ifneq ($(shell git status --porcelain),)
 endif
 
 
-PROJECT_PACKAGE := github.com/spotahome/redis-operator
+PROJECT_PACKAGE := github.com/dotoops/redis-operator
 CODEGEN_IMAGE := ghcr.io/slok/kube-code-generator:v1.27.0
 PORT := 9710
 
@@ -56,7 +56,7 @@ DEV_DIR := docker/development
 APP_DIR := docker/app
 
 # workdir
-WORKDIR := /go/src/github.com/spotahome/redis-operator
+WORKDIR := /go/src/github.com/dotoops/redis-operator
 
 # The default action of this Makefile is to build the development docker image
 .PHONY: default

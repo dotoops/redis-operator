@@ -348,7 +348,7 @@ kubectl delete redisfailover <NAME>
 
 ### Redis Operator
 
-[![Redis Operator Image](https://quay.io/repository/dotoops/redis-operator/status "Redis Operator Image")](https://quay.io/repository/dotoops/redis-operator)
+[![Redis Operator Image](https://docker.io/repository/dotoops/redis-operator/status "Redis Operator Image")](https://docker.io/repository/dotoops/redis-operator)
 ## Documentation
 
 For the code documentation, you can lookup on the [GoDoc](https://godoc.org/github.com/dotoops/redis-operator).
