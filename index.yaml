@@ -8,7 +8,7 @@ entries:
     created: "2023-08-17T10:34:59.596614311Z"
     description: A Helm chart for the Spotahome Redis Operator
     digest: dabb00778eae3b28286cb58b83195ac594e42fb57fbbf2999e4e7c87d4f45558
-    home: https://github.com/spotahome/redis-operator
+    home: https://github.com/dotoops/redis-operator
     keywords:
     - golang
     - operator
@@ -16,9 +16,9 @@ entries:
     kubeVersion: '>=1.21.0-0'
     name: redis-operator
     sources:
-    - https://github.com/spotahome/redis-operator
+    - https://github.com/dotoops/redis-operator
     urls:
-    - https://github.com/spotahome/redis-operator/releases/download/Chart-3.3.0/redis-operator-3.3.0.tgz
+    - https://github.com/dotoops/redis-operator/releases/download/Chart-3.3.0/redis-operator-3.3.0.tgz
     version: 3.3.0
   - annotations:
       category: Redis Operator
