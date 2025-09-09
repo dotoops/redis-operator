@@ -17,7 +17,7 @@ RUN wget http://github.com/kubernetes/code-generator/archive/kubernetes-${CODEGE
     touch /go/src/k8s.io/kubernetes/hack/boilerplate/boilerplate.go.txt
 
 # Mock creator
-ARG MOCKERY_VERSION="2.9.6"
+ARG MOCKERY_VERSION="3.5.4"
 RUN wget -c https://github.com/vektra/mockery/releases/download/v${MOCKERY_VERSION}/mockery_${MOCKERY_VERSION}_$(uname -o)_$(uname -m).tar.gz -O - | tar -xz -C /go/bin/
 
 # Create user
