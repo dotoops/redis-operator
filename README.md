@@ -98,7 +98,7 @@ Once the operator is deployed inside a Kubernetes cluster, a new API will be acc
 In order to deploy a new redis-failover a [specification](example/redisfailover/basic.yaml) has to be created:
 
 ```
-REDIS_OPERATOR_VERSION=v1.2.4
+REDIS_OPERATOR_VERSION=v1.3.0
 kubectl create -f https://raw.githubusercontent.com/dotoops/redis-operator/${REDIS_OPERATOR_VERSION}/example/redisfailover/basic.yaml
 ```
 

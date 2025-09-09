@@ -1,4 +1,4 @@
-VERSION := v1.3.0-rc0
+VERSION := v1.3.0
 
 # Name of this service/application
 SERVICE_NAME := redis-operator
@@ -201,3 +201,13 @@ generate-crd:
 	-e CRD_OUT_PATH=/go/src/$(PROJECT_PACKAGE)/manifests \
 	$(CODEGEN_IMAGE) update-crd.sh
 	cp -f manifests/databases.spotahome.com_redisfailovers.yaml manifests/kustomize/base
+
+# Update version across all project files
+.PHONY: update-version
+update-version:
+ifndef NEW_VERSION
+	@echo "Error: NEW_VERSION is required"
+	@echo "Usage: make update-version NEW_VERSION=v1.4.0"
+	@exit 1
+endif
+	@./scripts/update-version.sh $(NEW_VERSION)
