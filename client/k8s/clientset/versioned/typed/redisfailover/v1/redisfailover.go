@@ -6,8 +6,8 @@ import (
 	"context"
 	"time"
 
-	v1 "github.com/spotahome/redis-operator/api/redisfailover/v1"
-	scheme "github.com/spotahome/redis-operator/client/k8s/clientset/versioned/scheme"
+	v1 "github.com/dotoops/redis-operator/api/redisfailover/v1"
+	scheme "github.com/dotoops/redis-operator/client/k8s/clientset/versioned/scheme"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"

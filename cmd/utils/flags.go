@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"regexp"
 
-	"github.com/spotahome/redis-operator/operator/redisfailover"
+	"github.com/dotoops/redis-operator/operator/redisfailover"
 	"k8s.io/client-go/util/homedir"
 )
 
@@ -36,7 +36,7 @@ func (c *CMDFlags) Init() {
 	flag.IntVar(&c.K8sQueriesPerSecond, "k8s-cli-qps-limit", 100, "Number of allowed queries per second by kubernetes client without client side throttling")
 	flag.IntVar(&c.K8sQueriesBurstable, "k8s-cli-burstable-limit", 100, "Number of allowed burst requests by kubernetes client without client side throttling")
 	// default is 3 for conccurency because kooper also defines 3 as default
-	// reference: https://github.com/spotahome/kooper/blob/master/controller/controller.go#L89
+	// reference: https://github.com/dotoops/kooper/blob/master/controller/controller.go#L89
 	flag.IntVar(&c.Concurrency, "concurrency", 3, "Number of conccurent workers meant to process events")
 	flag.StringVar(&c.LogLevel, "log-level", "info", "set log level")
 	// Parse flags
