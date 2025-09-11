@@ -66,7 +66,7 @@ func TestRBACServiceGetCreateOrUpdateRoleBinding(t *testing.T) {
 			errorOnGet:      kubeerrors.NewNotFound(schema.GroupResource{}, ""),
 			errorOnCreation: nil,
 			expActions: []kubetesting.Action{
-				newRBGetAction(testns, testRB.ObjectMeta.Name),
+				newRBGetAction(testns, testRB.Name),
 				newRBCreateAction(testns, testRB),
 			},
 			expErr: false,
@@ -78,7 +78,7 @@ func TestRBACServiceGetCreateOrUpdateRoleBinding(t *testing.T) {
 			errorOnGet:      kubeerrors.NewNotFound(schema.GroupResource{}, ""),
 			errorOnCreation: errors.New("wanted error"),
 			expActions: []kubetesting.Action{
-				newRBGetAction(testns, testRB.ObjectMeta.Name),
+				newRBGetAction(testns, testRB.Name),
 				newRBUpdateAction(testns, testRB),
 			},
 			expErr: true,
@@ -90,7 +90,7 @@ func TestRBACServiceGetCreateOrUpdateRoleBinding(t *testing.T) {
 			errorOnGet:      nil,
 			errorOnCreation: nil,
 			expActions: []kubetesting.Action{
-				newRBGetAction(testns, testRB.ObjectMeta.Name),
+				newRBGetAction(testns, testRB.Name),
 				newRBUpdateAction(testns, testRB),
 			},
 			expErr: false,
@@ -110,7 +110,31 @@ func TestRBACServiceGetCreateOrUpdateRoleBinding(t *testing.T) {
 			errorOnGet:      nil,
 			errorOnCreation: nil,
 			expActions: []kubetesting.Action{
-				newRBGetAction(testns, testRB.ObjectMeta.Name),
+				newRBGetAction(testns, testRB.Name),
+				newRBDeleteAction(testns, testRB.Name),
+				newRBCreateAction(testns, testRB),
+			},
+			expErr: false,
+		},
+		{
+			name: "An change in role reference inside binding should recreate the role binding.",
+			rb:   testRB,
+			getRBResult: &rbacv1.RoleBinding{
+				Subjects: []rbacv1.Subject{
+					{
+						Kind:      rbacv1.UserKind,
+						Name:      "user",
+						Namespace: testns,
+					},
+				},
+				RoleRef: rbacv1.RoleRef{
+					Name: "oldroleRef",
+				},
+			},
+			errorOnGet:      nil,
+			errorOnCreation: nil,
+			expActions: []kubetesting.Action{
+				newRBGetAction(testns, testRB.Name),
 				newRBDeleteAction(testns, testRB.Name),
 				newRBCreateAction(testns, testRB),
 			},
@@ -128,6 +152,12 @@ func TestRBACServiceGetCreateOrUpdateRoleBinding(t *testing.T) {
 				return true, test.getRBResult, test.errorOnGet
 			})
 			mcli.AddReactor("create", "rolebindings", func(action kubetesting.Action) (bool, runtime.Object, error) {
+				return true, nil, test.errorOnCreation
+			})
+			mcli.AddReactor("delete", "rolebindings", func(action kubetesting.Action) (bool, runtime.Object, error) {
+				return true, nil, nil
+			})
+			mcli.AddReactor("update", "rolebindings", func(action kubetesting.Action) (bool, runtime.Object, error) {
 				return true, nil, test.errorOnCreation
 			})
 
