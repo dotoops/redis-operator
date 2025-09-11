@@ -14,7 +14,7 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
       - uses: actions/setup-go@v4
         with:
           go-version-file: go.mod
@@ -32,7 +32,7 @@ jobs:
     name: Unit test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
       - uses: actions/setup-go@v4
         with:
           go-version-file: go.mod
@@ -47,7 +47,7 @@ jobs:
       matrix:
         kubernetes: [1.24.16, 1.25.12, 1.26.7, 1.27.3 ]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
       - uses: actions/setup-go@v4
         with:
           go-version-file: go.mod
@@ -66,7 +66,7 @@ jobs:
     name: Chart testing
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
