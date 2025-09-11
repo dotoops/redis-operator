@@ -18,11 +18,14 @@ jobs:
       - uses: actions/setup-go@v4
         with:
           go-version-file: go.mod
-          cache: false
+          cache: true
+      
+      - name: Download dependencies
+        run: go mod download
+
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v3
+        uses: golangci/golangci-lint-action@v8
         with:
-          version: v1.53
           args: --timeout=15m
 
   unit-test:
