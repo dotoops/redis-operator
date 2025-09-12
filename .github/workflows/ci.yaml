@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-go@v4
+      - uses: actions/setup-go@v6
         with:
           go-version-file: go.mod
           cache: true
@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-go@v4
+      - uses: actions/setup-go@v6
         with:
           go-version-file: go.mod
       - run: make ci-unit-test
@@ -48,7 +48,7 @@ jobs:
         kubernetes: [1.24.16, 1.25.12, 1.26.7, 1.27.3 ]
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-go@v4
+      - uses: actions/setup-go@v6
         with:
           go-version-file: go.mod
       - name: Install conntrack
