@@ -1,7 +1,7 @@
 # redis-operator
 
-[![Build Status](https://github.com/spotahome/redis-operator/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/spotahome/redis-operator)
-[![Go Report Card](https://goreportcard.com/badge/github.com/spotahome/redis-operator)](https://goreportcard.com/report/github.com/spotahome/redis-operator)
+[![Build Status](https://github.com/dotoops/redis-operator/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/dotoops/redis-operator)
+[![Go Report Card](https://goreportcard.com/badge/github.com/dotoops/redis-operator)](https://goreportcard.com/report/github.com/dotoops/redis-operator)
 
 Redis Operator creates/configures/manages redis-failovers atop Kubernetes.
 
@@ -23,7 +23,7 @@ It can be done with plain old [deployment](example/operator), using [Kustomize](
 From the root folder of the project, execute the following:
 
 ```
-helm repo add redis-operator https://spotahome.github.io/redis-operator
+helm repo add redis-operator https://dotoops.github.io/redis-operator
 helm repo update
 helm install redis-operator redis-operator/redis-operator
 ```
@@ -34,7 +34,7 @@ Helm chart only manage the creation of CRD in the first install. In order to upd
 
 ```
 REDIS_OPERATOR_VERSION=v1.3.0
-kubectl replace -f https://raw.githubusercontent.com/spotahome/redis-operator/${REDIS_OPERATOR_VERSION}/manifests/databases.spotahome.com_redisfailovers.yaml
+kubectl replace -f https://raw.githubusercontent.com/dotoops/redis-operator/${REDIS_OPERATOR_VERSION}/manifests/databases.dotoops.com_redisfailovers.yaml
 ```
 
 ```
@@ -46,8 +46,8 @@ To create the operator, you can directly create it with kubectl:
 
 ```
 REDIS_OPERATOR_VERSION=v1.3.0
-kubectl create -f https://raw.githubusercontent.com/spotahome/redis-operator/${REDIS_OPERATOR_VERSION}/manifests/databases.spotahome.com_redisfailovers.yaml
-kubectl apply -f https://raw.githubusercontent.com/spotahome/redis-operator/${REDIS_OPERATOR_VERSION}/example/operator/all-redis-operator-resources.yaml
+kubectl create -f https://raw.githubusercontent.com/dotoops/redis-operator/${REDIS_OPERATOR_VERSION}/manifests/databases.dotoops.com_redisfailovers.yaml
+kubectl apply -f https://raw.githubusercontent.com/dotoops/redis-operator/${REDIS_OPERATOR_VERSION}/example/operator/all-redis-operator-resources.yaml
 ```
 
 This will create a deployment named `redisoperator`.
@@ -60,7 +60,7 @@ but it also comes with a few presets (in the form of overlays) supporting the mo
 To install the operator with default settings and every necessary resource (including RBAC, service account, default resource limits, etc), install the `default` overlay:
 
 ```shell
-kustomize build github.com/spotahome/redis-operator/manifests/kustomize/overlays/default
+kustomize build github.com/dotoops/redis-operator/manifests/kustomize/overlays/default
 ```
 
 If you would like to customize RBAC or the service account used, you can install the `minimal` overlay.
@@ -70,7 +70,7 @@ Finally, you can install the `full` overlay if you want everything this operator
 It's always a good practice to pin the version of the operator in your configuration to make sure you are not surprised by changes on the latest development branch:
 
 ```shell
-kustomize build github.com/spotahome/redis-operator/manifests/kustomize/overlays/default?ref=v1.2.4
+kustomize build github.com/dotoops/redis-operator/manifests/kustomize/overlays/default?ref=v1.2.4
 ```
 
 You can easily create your own config by creating a `kustomization.yaml` file
@@ -86,7 +86,7 @@ commonLabels:
     foo: bar
 
 resources:
-  - github.com/spotahome/redis-operator/manifests/kustomize/overlays/full
+  - github.com/dotoops/redis-operator/manifests/kustomize/overlays/full
 ```
 
 Take a look at the manifests inside [manifests/kustomize](manifests/kustomize) for more details.
@@ -98,8 +98,8 @@ Once the operator is deployed inside a Kubernetes cluster, a new API will be acc
 In order to deploy a new redis-failover a [specification](example/redisfailover/basic.yaml) has to be created:
 
 ```
-REDIS_OPERATOR_VERSION=v1.2.4
-kubectl create -f https://raw.githubusercontent.com/spotahome/redis-operator/${REDIS_OPERATOR_VERSION}/example/redisfailover/basic.yaml
+REDIS_OPERATOR_VERSION=v1.3.0
+kubectl create -f https://raw.githubusercontent.com/dotoops/redis-operator/${REDIS_OPERATOR_VERSION}/example/redisfailover/basic.yaml
 ```
 
 This redis-failover will be managed by the operator, resulting in the following elements created inside Kubernetes:
@@ -206,7 +206,7 @@ app.kubernetes.io/component
 app.kubernetes.io/managed-by
 app.kubernetes.io/name
 app.kubernetes.io/part-of
-redisfailovers.databases.spotahome.com/name
+redisfailovers.databases.dotoops.com/name
 ```
 
 
@@ -229,7 +229,7 @@ type: Opaque
 stringData:
   password: MWYyZDFlMmU2N2Rm
 ---
-apiVersion: databases.spotahome.com/v1
+apiVersion: databases.dotoops.com/v1
 kind: RedisFailover
 metadata:
   name: foo
@@ -281,7 +281,7 @@ echo -n "pass" > password
 kubectl create secret generic redis-auth --from-file=password
 
 ## example config
-apiVersion: databases.spotahome.com/v1
+apiVersion: databases.dotoops.com/v1
 kind: RedisFailover
 metadata:
   name: redisfailover
@@ -333,7 +333,7 @@ If you want to delete the operator from your Kubernetes cluster, the operator de
 Also, the CRD has to be deleted. Deleting CRD automatically wil delete all redis failover custom resources and their managed resources:
 
 ```
-kubectl delete crd redisfailovers.databases.spotahome.com
+kubectl delete crd redisfailovers.databases.dotoops.com
 ```
 
 ### Single Redis Failover
@@ -348,9 +348,9 @@ kubectl delete redisfailover <NAME>
 
 ### Redis Operator
 
-[![Redis Operator Image](https://quay.io/repository/spotahome/redis-operator/status "Redis Operator Image")](https://quay.io/repository/spotahome/redis-operator)
+[![Redis Operator Image](https://docker.io/repository/dotoops/redis-operator/status "Redis Operator Image")](https://docker.io/repository/dotoops/redis-operator)
 ## Documentation
 
-For the code documentation, you can lookup on the [GoDoc](https://godoc.org/github.com/spotahome/redis-operator).
+For the code documentation, you can lookup on the [GoDoc](https://godoc.org/github.com/dotoops/redis-operator).
 
 Also, you can check more deeply information on the [docs folder](docs).

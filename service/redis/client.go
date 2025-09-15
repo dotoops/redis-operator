@@ -9,9 +9,9 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/dotoops/redis-operator/log"
+	"github.com/dotoops/redis-operator/metrics"
 	rediscli "github.com/go-redis/redis/v8"
-	"github.com/spotahome/redis-operator/log"
-	"github.com/spotahome/redis-operator/metrics"
 )
 
 // Client defines the functions neccesary to connect to redis and sentinel to get or set what we nned

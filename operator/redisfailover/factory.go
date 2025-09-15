@@ -14,12 +14,12 @@ import (
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/cache"
 
-	redisfailoverv1 "github.com/spotahome/redis-operator/api/redisfailover/v1"
-	"github.com/spotahome/redis-operator/log"
-	"github.com/spotahome/redis-operator/metrics"
-	rfservice "github.com/spotahome/redis-operator/operator/redisfailover/service"
-	"github.com/spotahome/redis-operator/service/k8s"
-	"github.com/spotahome/redis-operator/service/redis"
+	redisfailoverv1 "github.com/dotoops/redis-operator/api/redisfailover/v1"
+	"github.com/dotoops/redis-operator/log"
+	"github.com/dotoops/redis-operator/metrics"
+	rfservice "github.com/dotoops/redis-operator/operator/redisfailover/service"
+	"github.com/dotoops/redis-operator/service/k8s"
+	"github.com/dotoops/redis-operator/service/redis"
 )
 
 const (
